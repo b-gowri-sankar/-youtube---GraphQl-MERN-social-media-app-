@@ -15,7 +15,7 @@ const generateToken = (user) => {
 			username: user.username,
 		},
 		process.env.SECRET_KEY,
-		{ expiresIn: "1d" }
+		{ expiresIn: "1h" }
 	);
 };
 

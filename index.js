@@ -13,6 +13,7 @@ const server = new ApolloServer({
 	typeDefs,
 	resolvers,
 	plugins: [ApolloServerPluginLandingPageGraphQLPlayground({})],
+	context: ({ req }) => ({ req }),
 });
 mongoose.connect(process.env.MONGO_URI, () => {
 	console.log("Mongodb is connected");
