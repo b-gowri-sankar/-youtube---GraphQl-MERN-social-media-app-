@@ -9,6 +9,7 @@ import { Register } from "./pages/Register";
 import MenuBar from "./components/MenuBar";
 import { AuthProvider } from "./context/auth";
 import AuthRoute from "./utils/AuthRoute";
+import { SinglePost } from "./pages/SinglePost.js";
 
 const App = () => {
 	return (
@@ -18,6 +19,8 @@ const App = () => {
 					<MenuBar />
 					<Routes>
 						<Route exact path="/" element={<Home />} />
+						<Route path="/posts/:postId" element={<SinglePost />} />
+
 						<Route path="/" element={<AuthRoute />}>
 							<Route path="/login" element={<Login />} />
 							<Route exact path="/register" element={<Register />} />
