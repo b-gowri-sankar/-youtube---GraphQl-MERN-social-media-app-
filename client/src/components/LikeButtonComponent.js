@@ -1,5 +1,5 @@
 import React from "react";
-import { Icon, Label, Button } from "semantic-ui-react";
+import { Icon, Label, Button, Popup } from "semantic-ui-react";
 import { gql, useMutation } from "@apollo/client";
 import { Link } from "react-router-dom";
 
@@ -18,6 +18,9 @@ export const LikeButtonComponent = ({
 
 	const [likePost] = useMutation(LIKE_POST, {
 		variables: { postId: id },
+		onError(err) {
+			console.log(err);
+		},
 	});
 
 	const handleClick = () => {
@@ -41,12 +44,18 @@ export const LikeButtonComponent = ({
 	);
 
 	return (
-		<Button as="div" labelPosition="right">
-			{likeButton}
-			<Label basic color="teal" pointing="left">
-				{likeCount}
-			</Label>
-		</Button>
+		<Popup
+			content="Like a post"
+			inverted
+			trigger={
+				<Button as="div" labelPosition="right">
+					{likeButton}
+					<Label basic color="teal" pointing="left">
+						{likeCount}
+					</Label>
+				</Button>
+			}
+		/>
 	);
 };
 
