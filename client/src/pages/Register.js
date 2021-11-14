@@ -2,20 +2,20 @@ import React from "react";
 import { Form, Button } from "semantic-ui-react";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "../utils/hooks";
 
 export const Register = (props) => {
 	const history = useNavigate();
 	const [errors, setErrors] = React.useState({});
-	const [values, setValues] = React.useState({
+
+	const initilaState = {
 		username: "",
 		email: "",
 		password: "",
 		confirmPassword: "",
-	});
-	const onChange = (e) => {
-		const { name, value } = e.target;
-		setValues({ ...values, [name]: value });
 	};
+
+	const { onChange, onSubmit, values } = useForm(registerUser, initilaState);
 
 	const [addUser, { loading }] = useMutation(REGISTER_USER, {
 		update(proxy, result) {
@@ -32,10 +32,9 @@ export const Register = (props) => {
 		variables: values,
 	});
 
-	const onSubmit = (e) => {
-		e.preventDefault();
+	function registerUser() {
 		addUser();
-	};
+	}
 
 	return (
 		<div style={{ padding: "20px", maxWidth: "60%", margin: "auto" }}>

@@ -11,7 +11,7 @@ const MenuBar = () => {
 		const pathname = window.location.pathname;
 		const path = pathname === "/" ? "home" : pathname.substr(1);
 		setActiveItem(path);
-	}, []);
+	}, [window.location.pathname]);
 
 	return (
 		<Menu pointing secondary size="massive">
@@ -28,7 +28,7 @@ const MenuBar = () => {
 					active={activeItem === "login"}
 					onClick={handleItemClick}
 					as={Link}
-					to="/Login"
+					to="/login"
 				/>
 				<Menu.Item
 					name="register"
