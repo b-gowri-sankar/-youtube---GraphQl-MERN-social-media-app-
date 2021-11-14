@@ -3,8 +3,10 @@ import { Form, Button } from "semantic-ui-react";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../utils/hooks";
+import { AuthContext } from "../context/auth";
 
 export const Register = (props) => {
+	const context = React.useContext(AuthContext);
 	const history = useNavigate();
 	const [errors, setErrors] = React.useState({});
 
@@ -19,7 +21,7 @@ export const Register = (props) => {
 
 	const [addUser, { loading }] = useMutation(REGISTER_USER, {
 		update(proxy, result) {
-			console.log("it is executing", props);
+			window.localStorage.setItem("user", result.data.register);
 			history("/");
 		},
 		onError(err) {

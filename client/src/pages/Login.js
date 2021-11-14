@@ -3,8 +3,10 @@ import { Form, Button } from "semantic-ui-react";
 import { gql, useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "../utils/hooks";
+import { AuthContext } from "../context/auth";
 
 export const Login = (props) => {
+	const context = React.useContext(AuthContext);
 	const history = useNavigate();
 	const [errors, setErrors] = React.useState({});
 
@@ -15,7 +17,7 @@ export const Login = (props) => {
 
 	const [loginUser, { loading }] = useMutation(LOGIN_USER, {
 		update(proxy, result) {
-			console.log("it is executing", props);
+			window.localStorage.setItem("user", result.data.login);
 			history("/");
 		},
 		onError(err) {
