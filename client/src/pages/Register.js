@@ -21,7 +21,7 @@ export const Register = (props) => {
 
 	const [addUser, { loading }] = useMutation(REGISTER_USER, {
 		update(proxy, result) {
-			window.localStorage.setItem("user", result.data.register);
+			context.login(result.data.register);
 			history("/");
 		},
 		onError(err) {

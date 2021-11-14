@@ -17,7 +17,7 @@ export const Login = (props) => {
 
 	const [loginUser, { loading }] = useMutation(LOGIN_USER, {
 		update(proxy, result) {
-			window.localStorage.setItem("user", result.data.login);
+			context.login(result.data.login);
 			history("/");
 		},
 		onError(err) {

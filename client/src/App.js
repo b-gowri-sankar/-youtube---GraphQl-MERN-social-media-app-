@@ -8,18 +8,23 @@ import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
 import MenuBar from "./components/MenuBar";
 import { AuthProvider } from "./context/auth";
+import AuthRoute from "./utils/AuthRoute";
 
 const App = () => {
 	return (
 		<Router>
-			<Container>
-				<MenuBar />
-				<Routes>
-					<Route exact path="/" element={<Home />} />
-					<Route exact path="/login" element={<Login />} />
-					<Route exact path="/register" element={<Register />} />
-				</Routes>
-			</Container>
+			<AuthProvider>
+				<Container>
+					<MenuBar />
+					<Routes>
+						<Route exact path="/" element={<Home />} />
+						<Route path="/" element={<AuthRoute />}>
+							<Route path="/login" element={<Login />} />
+							<Route exact path="/register" element={<Register />} />
+						</Route>
+					</Routes>
+				</Container>
+			</AuthProvider>
 		</Router>
 	);
 };
