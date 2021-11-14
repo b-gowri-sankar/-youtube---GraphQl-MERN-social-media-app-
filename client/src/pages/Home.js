@@ -5,10 +5,7 @@ import { load } from "dotenv";
 import { PostCard } from "../components/PostCard";
 
 export const Home = () => {
-	const {
-		loading,
-		data: { getPosts: posts },
-	} = useQuery(FETCH_POSTS_QUERY);
+	const { loading, data } = useQuery(FETCH_POSTS_QUERY);
 
 	return (
 		<Grid columns={3}>
@@ -21,8 +18,8 @@ export const Home = () => {
 				{loading ? (
 					<h1>Loding Posts...</h1>
 				) : (
-					posts &&
-					posts.map((post) => (
+					data?.getPosts &&
+					data?.getPosts?.map((post) => (
 						<Grid.Column key={post.id} style={{ marginBottom: "20px" }}>
 							<PostCard post={post} />
 						</Grid.Column>
